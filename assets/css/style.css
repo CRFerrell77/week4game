@@ -1,0 +1,145 @@
+body {
+    background-color: #534B4B;
+    
+    font-family: 'Geo', sans-serif;
+    font-size: 200%;
+}
+
+/* default */
+.alive { 
+    text-align: center;
+    border: 2px solid lightslategray ;
+    background-color: lightseagreen;
+    color: white;
+    height: 230px;
+    width: 200px;
+    
+       
+}
+
+.defender {
+    text-align: center;
+    border: 2px solid lightslategray ;
+    background-color: #AA0000;
+    color: white;
+    height: 230px;
+    width: 200px;
+       
+}
+
+.attacker {
+    text-align: center;
+    border: 2px solid lightslategray;
+    background-color: #1100AA;
+    color: white;
+    height: 230px;
+    width: 200px;
+       
+}
+
+.dead {
+    text-align: center;
+    border: 2px solid #AA0000 ;
+    background-color: #000000;
+    color: #AA0000;
+    height: 230px;
+    width: 200px;
+       
+}
+
+
+/* .alive img {
+    height: 150px;
+    width: 180px;
+    padding: 0px;
+    margin: 0px;
+
+} */
+
+/* hit point tracker */
+.hpbar {
+
+}
+
+/* class for attack button */
+.fightButton {
+    position: absolute;
+    top: 50%;  /* position the top  edge of the element at the middle of the parent */
+    left: 50%; /* position the left edge of the element at the middle of the parent */
+
+    transform: translate(-50%, -50%); /* This is a shorthand of translateX(-50%) and translateY(-50%) */
+
+    border: 0px;
+    background-color:rgba(0, 0, 0, 0);
+    
+}
+
+.fightButton img {
+    width: 200px;
+}
+
+.fightButton:hover {
+    background-color: #DAB71D;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.monBtn {
+    border: 0px;
+}
+
+.monBtn img {
+    height: 150px;
+    width: 180px;
+    padding: 0px;
+    margin: 0px;
+    
+}
+
+/* lower right */
+.box0 {
+    position:absolute;
+    bottom:0;
+    right:0;
+    z-index: 2;
+}
+
+/* upper left */
+.box1 { 
+    position:absolute;
+    top:0;
+    left:0;
+    z-index: 2;
+}
+
+/* upper right */
+.box2 {
+    position:absolute;
+    top:0;
+    right:0;
+    z-index: 2;
+}
+
+/* lower left */
+.box3 {
+    position:absolute;
+    bottom:0;
+    left:0;
+    z-index: 2;
+}
+
+/* attacker box*/
+.boxAtt {
+    position:absolute;
+    bottom: 40%;
+    left: 25%;
+    z-index: 3;
+}
+
+/* defender box*/
+.boxDef {
+    position:absolute;
+    bottom: 40%;
+    left: 60%;
+    z-index: 3;
+}
+
