@@ -63,39 +63,7 @@ function fillLobby(chars) {
     }
 };
 
-$(document).on("click", (function(event) {
-    
-    //pull parent div id
-    idx = $(event.target).closest("div").prop("id");
-    // console.log(idx);
 
-    if (attSelect) {
-        if (idx == "godzillaX") {
-            Attacker(godzilla);
-            $("#godzillaX").removeClass("alive box0").addClass("boxAtt attacker");
-            attSelect = false;
-        } 
-        else if (idx == "destoroyahX") {
-            Attacker(destoroyah);
-            $("#destoroyahX").removeClass("alive box2").addClass("boxAtt attacker");
-            attSelect = false;
-        } 
-        else if (idx == "giganX") {
-            Attacker(gigan);
-            $("#giganX").removeClass("alive box1").addClass("boxAtt attacker");
-            attSelect = false;
-        } 
-        else if (idx == "hedorahX") {
-            Attacker(hedorah);
-            $("#hedorahX").removeClass("alive box3").addClass("boxAtt attacker");
-            attSelect = false;
-        }         
-    } 
-    else {
-        defSelect();
-    }
-     
-}));
 
 
 function defSelect() {
@@ -182,4 +150,37 @@ function fight(attacker, defender){// this is the attack button
 
 window.onload = function() {
     fillLobby(monsterArray);
+    $(".alive").on("click", function(event) {
+        
+        //pull parent div id
+        idx = $(event.target).closest("div").prop("id");
+        // console.log(idx);
+    
+        if (attSelect) {
+            if (idx == "godzillaX") {
+                Attacker(godzilla);
+                $("#godzillaX").removeClass("alive box0").addClass("boxAtt attacker");
+                attSelect = false;
+            } 
+            else if (idx == "destoroyahX") {
+                Attacker(destoroyah);
+                $("#destoroyahX").removeClass("alive box2").addClass("boxAtt attacker");
+                attSelect = false;
+            } 
+            else if (idx == "giganX") {
+                Attacker(gigan);
+                $("#giganX").removeClass("alive box1").addClass("boxAtt attacker");
+                attSelect = false;
+            } 
+            else if (idx == "hedorahX") {
+                Attacker(hedorah);
+                $("#hedorahX").removeClass("alive box3").addClass("boxAtt attacker");
+                attSelect = false;
+            }         
+        } 
+        else {
+            defSelect();
+        }
+         
+    });
 };
