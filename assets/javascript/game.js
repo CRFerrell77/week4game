@@ -127,31 +127,45 @@ function updateStats(attacker, defender){
     console.log("D: " + defender);
 }
 
-$(".fightButton").on("click", fight(currentAtt, currentDef));
-// $(".fightButton").on("click", function() {
-//     console.log("fight button was clicked");
-// });
 
-function fight(attacker, defender) {// this is the attack button
+//new way fight button
+
+$(".fightButton").on("click", function() {
     console.log("fight button was clicked");
+    
     if(fightInProgress){
-        defender.hp -= attacker.atk_pts;
-        attacker.hp -= defender.base_atk;
-        attacker.atk_pts += attacker.base_atk
+        currentDef.hp -= currentAtt.atk_pts;
+        currentAtt.hp -= currentDef.base_atk;
+        currentAtt.atk_pts += currentAtt.base_atk
         //update stats
         updateStats(currentAtt, currentDef);
+    };
+
+});
+
+// old way fight button (globals not pulling)
+// $(".fightButton").on("click", fight(currentAtt, currentDef));
+
+// function fight(attacker, defender) {// this is the attack button
+//     console.log("fight button was clicked");
+//     if(fightInProgress){
+//         defender.hp -= attacker.atk_pts;
+//         attacker.hp -= defender.base_atk;
+//         attacker.atk_pts += attacker.base_atk
+//         //update stats
+//         updateStats(currentAtt, currentDef);
         
 
-        // if(defender.hp < 1){
-        //     var id = "#" + defender.name + "X";
-        //     $(id).html("");
-        //     fightInProgress = false
-        //     defSelect();
-        // }
-        //select new defender 
-        //HEALTH BAR
-    }
-}
+//         // if(defender.hp < 1){
+//         //     var id = "#" + defender.name + "X";
+//         //     $(id).html("");
+//         //     fightInProgress = false
+//         //     defSelect();
+//         // }
+//         //select new defender 
+//         //HEALTH BAR
+//     }
+// }
 
 window.onload = function() {
     fillLobby(monsterArray);
