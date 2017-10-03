@@ -26,7 +26,7 @@ function characterCreator(name, hp, atk_pts){
     output.image = output.name + ".jpg";
     output.boxCl = "";
     return output;
-    }
+}
     
 var godzilla = characterCreator("godzilla", 100, 5)
 // var mothra = characterCreator("mothra", 90, 6)
@@ -127,15 +127,20 @@ function updateStats(attacker, defender){
     console.log("D: " + defender);
 }
 
-$(".fightButton").click(fight(currentAtt, currentDef));
+$(".fightButton").on("click", fight(currentAtt, currentDef));
+// $(".fightButton").on("click", function() {
+//     console.log("fight button was clicked");
+// });
 
-function fight(attacker, defender){// this is the attack button
+function fight(attacker, defender) {// this is the attack button
+    console.log("fight button was clicked");
     if(fightInProgress){
         defender.hp -= attacker.atk_pts;
         attacker.hp -= defender.base_atk;
         attacker.atk_pts += attacker.base_atk
         //update stats
         updateStats(currentAtt, currentDef);
+        
 
         // if(defender.hp < 1){
         //     var id = "#" + defender.name + "X";
@@ -183,4 +188,10 @@ window.onload = function() {
         }
          
     });
+
+
+
+
 };
+
+
