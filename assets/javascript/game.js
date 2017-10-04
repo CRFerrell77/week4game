@@ -30,14 +30,12 @@ function characterCreator(name, hp, atk_pts){
     return output;
 }
     
-var godzilla = characterCreator("godzilla", 100, 5)
-// var mothra = characterCreator("mothra", 90, 6)
-var gigan = characterCreator("gigan", 110, 4)
-var destoroyah = characterCreator("destoroyah",150, 3)
-// var mechagodzilla = characterCreator("mechagodzilla", 125, 3)
-var hedorah = characterCreator("hedorah", 95, 6)
+var godzilla = characterCreator("godzilla", 1100, 116)
+var gigan = characterCreator("gigan", 1200, 114)
+var destoroyah = characterCreator("destoroyah", 1300, 111)
+var hedorah = characterCreator("hedorah", 1000, 118)
 
-var monsterArray = [godzilla, /*mothra,*/ gigan, destoroyah, /*mechagodzilla,*/ hedorah];
+var monsterArray = [godzilla, gigan, destoroyah, hedorah];
 
 var fightRound = 1;
 
@@ -147,7 +145,9 @@ $(".fightButton").on("click", function() {
         };
     };
 
-    if(currentDef.hp < 1){
+    if (currentAtt.hp < 1) {
+        alert("you dead!");
+    } else if (currentDef.hp < 1){
         $(".boxDefHp").html("<h4>Select new combatant!</h4>");
         console.log("Dead defender");
         fightInProgress = false;
