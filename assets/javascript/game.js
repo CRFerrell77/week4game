@@ -8,12 +8,14 @@ var currentAtt = {
     base_atk: 0,
     atk_pts: 0,
     hp: 0,
+    readyTag: 0,
 };
 
 var currentDef = {
     base_atk: 0,
     atk_pts: 0,
     hp: 1,
+    readyTag: 0,
 };
 
 function characterCreator(name, hp, atk_pts){
@@ -37,7 +39,9 @@ var hedorah = characterCreator("hedorah", 95, 6)
 
 var monsterArray = [godzilla, /*mothra,*/ gigan, destoroyah, /*mechagodzilla,*/ hedorah];
 
-var fightRound = 0;
+var fightRound = 1;
+
+var deadCheck = 0;
 
 var idx = ""; //needed for selection
 
@@ -51,7 +55,7 @@ function fillLobby(chars) {
         monsDiv = $("<div id=" + chars[i].id + "></div>");
         monsDiv.html("<p>" + chars[i].name + "</p>" +
                     "<button class='monBtn'><span><img src='" + imgPath + chars[i].image +"'/></span></button>" +
-                    "<p>HP: " + chars[i].hp + "</p>");
+                    "<p>starting HP: " + chars[i].hp + "</p>");
         $(monsDiv).addClass("alive");
         $(monsDiv).addClass(boxClass);
 
@@ -68,7 +72,6 @@ function fillLobby(chars) {
 
 function defSelect() {
     //set enemy defender to one++
-    fightRound++;
     console.log("fight round " + fightRound + " opponent");
 
     if (idx == "godzillaX") {
@@ -100,9 +103,11 @@ function Attacker(character){
     currentAtt.hp = character.hp;
     currentAtt.atk_pts = character.atk_pts;
     currentAtt.base_atk = character.base_atk;
+    currentAtt.readyTag = 1;
     console.log("this is where the monster is attached to the generic term Attacker");
     console.log(currentAtt);
-    //stuff happens
+    //need to populate health bar
+
 }
 
 function Defender(character){
@@ -113,59 +118,100 @@ function Defender(character){
     currentDef.hp = character.hp;
     currentDef.atk_pts = character.atk_pts;
     currentDef.base_atk = character.base_atk;
+    currentDef.readyTag = 1;
     console.log("this is where the monster is attached to the generic term Defender");
     console.log(currentDef);
-    //stuff happens
+    //need to populate health bar
+
+
     fightInProgress = true;
+    console.log("FIP = True");
 }
 
-function updateStats(attacker, defender){
-    //update the scoreboard after each press of the attack button
-    //don't show attack power
-    //update stats
-    console.log("A: " + attacker);
-    console.log("D: " + defender);
-}
-
-
-//new way fight button
+//new way fight button, incorporates update stat block
 
 $(".fightButton").on("click", function() {
     console.log("fight button was clicked");
-    
-    if(fightInProgress){
-        currentDef.hp -= currentAtt.atk_pts;
-        currentAtt.hp -= currentDef.base_atk;
-        currentAtt.atk_pts += currentAtt.base_atk
-        //update stats
-        updateStats(currentAtt, currentDef);
+
+    if (currentAtt.readyTag === 1 && currentDef.readyTag === 1) {
+        if (fightInProgress) {
+            currentDef.hp -= currentAtt.atk_pts;
+            currentAtt.hp -= currentDef.base_atk;
+            currentAtt.atk_pts += currentAtt.base_atk
+            //update stats        
+            console.log("Att HP: " + currentAtt.hp + " ATK:" + currentAtt.atk_pts);
+            console.log("Def HP: " + currentDef.hp);
+            //need to populate health barS/update stats
+            $(".boxAttHp").html("<h4>HP: " + currentAtt.hp + "</h4>");
+            $(".boxDefHp").html("<h4>HP: " + currentDef.hp + "</h4>");
+        };
     };
 
-});
+    if(currentDef.hp < 1){
+        $(".boxDefHp").html("<h4>Select new combatant!</h4>");
+        console.log("Dead defender");
+        fightInProgress = false;
+        console.log("FIP = false");
+        currentDef.readyTag = 0;
 
-// old way fight button (globals not pulling)
-// $(".fightButton").on("click", fight(currentAtt, currentDef));
+        var idx = $(".defender").closest("div").prop("id");
+            console.log(idx);
 
-// function fight(attacker, defender) {// this is the attack button
-//     console.log("fight button was clicked");
-//     if(fightInProgress){
-//         defender.hp -= attacker.atk_pts;
-//         attacker.hp -= defender.base_atk;
-//         attacker.atk_pts += attacker.base_atk
-//         //update stats
-//         updateStats(currentAtt, currentDef);
+            if (idx == "godzillaX") {
+                $("#godzillaX").removeClass("boxDef defender").addClass("dead box0");
+                $("#godzillaX").html("<h2>godzilla</h2><img src='assets/images/skull.png' />");
+                deadCheck++;
+                console.log("dead checker: " + deadCheck);                
+            } 
+            else if (idx == "destoroyahX") {
+                $("#destoroyahX").removeClass("boxDef defender").addClass("dead box2");
+                $("#destoroyahX").html("<h2>destoroyah</h2><img src='assets/images/skull.png' />");
+                deadCheck++;
+                console.log("dead checker: " + deadCheck);
+            } 
+            else if (idx == "giganX") {
+                $("#giganX").removeClass("boxDef defender").addClass("dead box1");
+                $("#giganX").html("<h2>gigan</h2><img src='assets/images/skull.png' />");
+                deadCheck++;
+                console.log("dead checker: " + deadCheck);
+            } 
+            else if (idx == "hedorahX") {
+                $("#hedorahX").removeClass("boxDef defender").addClass("dead box3");
+                $("#hedorahX").html("<h2>hedorah</h2><img src='assets/images/skull.png' />");
+                deadCheck++;
+                console.log("dead checker: " + deadCheck);
+            }   
+
+        if (deadCheck === 3) {
+            $(".boxDefHp").html("");
+            alert("holy shit you won!");
+
+
+            //setTimeout(/*function for resetting game and counting wins*/, 3000); //3 secs
+        }
+
+
+    // HEALTH BAR??
+    };
+
+// function winChecker (monsters) {
+//     for (i = 0; i < monsters.length; i++) {
+//         var totalDead = 0;
+//         var checker = $("div").hasClass("dead");
         
-
-//         // if(defender.hp < 1){
-//         //     var id = "#" + defender.name + "X";
-//         //     $(id).html("");
-//         //     fightInProgress = false
-//         //     defSelect();
-//         // }
-//         //select new defender 
-//         //HEALTH BAR
+//         if (checker == true) {
+//             totalDead++;
+//             console.log(totalDead);
+//         }
+    
+//     $(".boxDefHp").html("");
+//     console.log("Winner-winner-chicken-dinner!");
+    
 //     }
 // }
+
+
+});
 
 window.onload = function() {
     fillLobby(monsterArray);
@@ -197,10 +243,14 @@ window.onload = function() {
                 attSelect = false;
             }         
         } 
-        else {
+        else if (!attSelect) {
             defSelect();
         }
          
+    });
+
+    $(".resetButton").on("click", function() {
+        //wipe everything, start over
     });
 
 

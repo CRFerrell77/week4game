@@ -9,7 +9,7 @@ body {
 .alive { 
     text-align: center;
     border: 2px solid lightslategray ;
-    background-color: lightseagreen;
+    background-color: #276863;
     color: white;
     height: 230px;
     width: 200px;
@@ -20,7 +20,7 @@ body {
 .defender {
     text-align: center;
     border: 2px solid lightslategray ;
-    background-color: #AA0000;
+    background-color: #660404;
     color: white;
     height: 230px;
     width: 200px;
@@ -30,7 +30,7 @@ body {
 .attacker {
     text-align: center;
     border: 2px solid lightslategray;
-    background-color: #1100AA;
+    background-color: #100772;
     color: white;
     height: 230px;
     width: 200px;
@@ -48,19 +48,6 @@ body {
 }
 
 
-/* .alive img {
-    height: 150px;
-    width: 180px;
-    padding: 0px;
-    margin: 0px;
-
-} */
-
-/* hit point tracker */
-.hpbar {
-
-}
-
 /* class for attack button */
 .fightButton {
     position: absolute;
@@ -74,6 +61,19 @@ body {
     
 }
 
+.resetButton {
+    position: absolute;
+    bottom: 0%;  /* position the top edge of the element at the middle of the parent */
+    left: 50%; /* position the left edge of the element at the middle of the parent */
+
+    transform: translate(-50%, -50%); /* This is a shorthand of translateX(-50%) and translateY(-50%) */
+
+    border: 0px;
+    background-color:rgba(0, 0, 0, 0);
+    /* visibility: hidden;     */
+}
+
+
 .fightButton img {
     width: 200px;
 }
@@ -83,11 +83,24 @@ body {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
+.resetButton:hover {
+    background-color: tomato;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
 .monBtn {
     border: 0px;
 }
 
 .monBtn img {
+    height: 150px;
+    width: 180px;
+    padding: 0px;
+    margin: 0px;
+    
+}
+
+.dead img {
     height: 150px;
     width: 180px;
     padding: 0px;
@@ -143,3 +156,29 @@ body {
     z-index: 3;
 }
 
+.boxAttHp {
+    height: 50px;
+    width: 200px;
+    text-align: center;
+    border: 2px solid lightslategray;
+    background-color: #100772;
+    color: white;
+    position:absolute;
+    bottom: 30%;
+    left: 25%;
+    z-index: 3;
+}
+
+.boxDefHp {
+    text-align: center;
+    border: 2px solid lightslategray ;
+    background-color: #660404;
+    color: white;
+    height: 50px;
+    width: 200px;
+    position:absolute;
+    bottom: 30%;
+    left: 60%;
+    z-index: 3;
+
+}
