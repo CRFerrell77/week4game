@@ -1,4 +1,4 @@
-
+var wins = 0;
 
 var fightInProgress = false;
 
@@ -184,8 +184,9 @@ $(".fightButton").on("click", function() {
 
         if (deadCheck === 3) {
             $(".boxDefHp").html("");
-            alert("holy shit you won!");
-
+            alert("you won!");
+            wins++;
+            console.log("wins: " + wins);
 
             //setTimeout(/*function for resetting game and counting wins*/, 3000); //3 secs
         }
@@ -193,23 +194,6 @@ $(".fightButton").on("click", function() {
 
     // HEALTH BAR??
     };
-
-// function winChecker (monsters) {
-//     for (i = 0; i < monsters.length; i++) {
-//         var totalDead = 0;
-//         var checker = $("div").hasClass("dead");
-        
-//         if (checker == true) {
-//             totalDead++;
-//             console.log(totalDead);
-//         }
-    
-//     $(".boxDefHp").html("");
-//     console.log("Winner-winner-chicken-dinner!");
-    
-//     }
-// }
-
 
 });
 
@@ -251,6 +235,10 @@ window.onload = function() {
 
     $(".resetButton").on("click", function() {
         //wipe everything, start over
+        window.location.reload(false);
+
+        //OK OK I admit this is a super cheat, and doesn't track wins, I am just running out of time! :(
+
     });
 
 
